@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: "http://localhost:2000/api",
+  baseURL: "https://translation.lionelkg.com/api",
   withCredentials: true,
 });
 
@@ -17,9 +17,13 @@ apiClient.interceptors.response.use(
     ) {
       originalRequest._retry = true;
       try {
-        await axios.post("http://localhost:2000/api/auth/refresh", null, {
-          withCredentials: true,
-        });
+        await axios.post(
+          "https://translation.lionelkg.com/api/auth/refresh",
+          null,
+          {
+            withCredentials: true,
+          },
+        );
         return apiClient(originalRequest);
       } catch (refreshError) {
         if (typeof window !== "undefined") {
