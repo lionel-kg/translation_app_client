@@ -1,0 +1,255 @@
+/* Vocabulary.module.scss */
+
+// --- Variables & Configuration ---
+$bg-dark: #0f172a;
+$text-light: #f1f5f9;
+$text-dim: #94a3b8;
+$primary: #6366f1; // Indigo
+$secondary: #ec4899; // Pink
+$success: #4ade80; // Green
+
+// --- Mixin Glassmorphism (L'effet de verre) ---
+@mixin glass-effect {
+  background: rgba(255, 255, 255, 0.05); // Blanc très transparent
+  backdrop-filter: blur(12px); // Le flou derrière
+  -webkit-backdrop-filter: blur(12px); // Safari
+  border: 1px solid rgba(255, 255, 255, 0.1); // Bordure subtile
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+// --- Structure Globale ---
+.pageContainer {
+  min-height: 100vh;
+  background-color: $bg-dark;
+  color: $text-light;
+  padding: 2rem;
+  font-family: "Inter", sans-serif;
+  position: relative;
+  overflow-x: hidden;
+}
+
+// --- Background Orbs (Décoration) ---
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  z-index: 0;
+  opacity: 0.4;
+  animation: float 10s infinite ease-in-out;
+}
+
+.orb1 {
+  top: -10%;
+  left: -10%;
+  width: 300px;
+  height: 300px;
+  background: $primary;
+}
+
+.orb2 {
+  bottom: -10%;
+  right: -10%;
+  width: 400px;
+  height: 400px;
+  background: $secondary;
+  animation-delay: -5s;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(20px, 30px);
+  }
+}
+
+.contentWrapper {
+  position: relative;
+  z-index: 1; // Au-dessus des orbs
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+// --- Header ---
+.header {
+  margin-bottom: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin: 0;
+    background: linear-gradient(to right, #fff, #94a3b8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+// --- La Grille Bento ---
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-auto-rows: 250px; // Hauteur de base
+  gap: 1.5rem;
+}
+
+// --- La Carte (Flip Logic) ---
+.cardContainer {
+  perspective: 1000px; // Indispensable pour l'effet 3D
+  cursor: pointer;
+
+  // Gestion des tailles Bento (Desktop uniquement)
+  @media (min-width: 768px) {
+    &.wide {
+      grid-column: span 2;
+    }
+    &.tall {
+      grid-row: span 2;
+    }
+    &.large {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+  }
+}
+
+.cardInner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); // Animation fluide
+  transform-style: preserve-3d; // Garde les enfants en 3D
+
+  &.isFlipped {
+    transform: rotateY(180deg);
+  }
+}
+
+// Les faces (Recto / Verso)
+.cardFace {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden; // Cache le dos quand retourné
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  // Application du Glassmorphism
+  @include glass-effect;
+}
+
+// --- Recto ---
+.cardFront {
+  // Rien de spécial, hérite de cardFace
+
+  .badge {
+    align-self: flex-start;
+    padding: 0.25rem 0.75rem;
+    border-radius: 99px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+
+    &.slang {
+      background: rgba($secondary, 0.2);
+      color: lighten($secondary, 20%);
+    }
+    &.idiom {
+      background: rgba($primary, 0.2);
+      color: lighten($primary, 20%);
+    }
+  }
+
+  .expression {
+    font-size: 1.8rem;
+    font-weight: 700;
+
+    &.largeText {
+      font-size: 3rem;
+    }
+  }
+
+  .hint {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.4);
+  }
+}
+
+// --- Verso ---
+.cardBack {
+  transform: rotateY(180deg); // Le dos est déjà retourné au départ
+  background: linear-gradient(
+    135deg,
+    rgba(30, 41, 59, 0.9),
+    rgba(15, 23, 42, 0.9)
+  ); // Fond un peu plus opaque pour la lisibilité
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  .definition {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+  }
+
+  .exampleBox {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1rem;
+    border-radius: 0.8rem;
+    font-style: italic;
+    color: lighten($primary, 20%);
+    font-size: 0.9rem;
+  }
+}
+// --- Pagination ---
+.paginationContainer {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 2rem;
+}
+
+.pageBtn {
+  background: rgba(255, 255, 255, 0.05); // Glass effect
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #f1f5f9;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  font-size: 0.9rem;
+
+  &:hover:not(:disabled) {
+    background: rgba(99, 102, 241, 0.3); // Couleur Primary au survol
+    border-color: rgba(99, 102, 241, 0.5);
+    transform: translateY(-2px);
+  }
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  &.active {
+    background: #6366f1; // Primary solid
+    border-color: #6366f1;
+    font-weight: bold;
+  }
+}
+
+.pageInfo {
+  color: #94a3b8;
+  font-size: 0.9rem;
+  margin: 0 0.5rem;
+}

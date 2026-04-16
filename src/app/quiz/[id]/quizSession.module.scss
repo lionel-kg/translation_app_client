@@ -1,0 +1,443 @@
+$bg-dark: #0f172a;
+$primary: #6366f1;
+$secondary: #ec4899;
+$text-light: #f1f5f9;
+$text-dim: #94a3b8;
+$success: #10b981;
+$danger: #ef4444;
+
+.container {
+  min-height: 100vh;
+  background: $bg-dark;
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 3rem;
+}
+
+.orb1,
+.orb2 {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+.orb1 {
+  width: 400px;
+  height: 400px;
+  background: $primary;
+  top: -100px;
+  right: -100px;
+}
+
+.orb2 {
+  width: 350px;
+  height: 350px;
+  background: $secondary;
+  bottom: -100px;
+  left: -100px;
+}
+
+.contentWrapper {
+  max-width: 650px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.loading {
+  color: $text-dim;
+  text-align: center;
+  padding: 4rem 2rem;
+  font-size: 1.1rem;
+}
+
+// Progress
+.progress {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.progressBar {
+  flex: 1;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, $primary, $secondary);
+  border-radius: 4px;
+  transition: width 0.4s ease;
+}
+
+.progressText {
+  color: $text-dim;
+  font-size: 0.85rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+// Question card
+.questionCard {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.questionType {
+  display: inline-block;
+  background: rgba($primary, 0.15);
+  color: $primary;
+  padding: 0.3rem 0.85rem;
+  border-radius: 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+}
+
+.questionText {
+  color: $text-light;
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.6;
+  margin-bottom: 1.75rem;
+}
+
+// MCQ Options
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.optionBtn {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.85rem;
+  padding: 1rem 1.25rem;
+  color: $text-light;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+  width: 100%;
+
+  &:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba($primary, 0.3);
+  }
+
+  &:disabled {
+    cursor: default;
+  }
+}
+
+.optionLetter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: $text-dim;
+}
+
+.optionText {
+  font-size: 0.92rem;
+  line-height: 1.5;
+  padding-top: 0.2rem;
+}
+
+.optionCorrect {
+  background: rgba($success, 0.12) !important;
+  border-color: rgba($success, 0.4) !important;
+
+  .optionLetter {
+    background: $success;
+    color: white;
+  }
+}
+
+.optionWrong {
+  background: rgba($danger, 0.12) !important;
+  border-color: rgba($danger, 0.4) !important;
+
+  .optionLetter {
+    background: $danger;
+    color: white;
+  }
+}
+
+.optionDim {
+  opacity: 0.4;
+}
+
+// Fill in the blank
+.fillForm {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.fillInput {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.75rem;
+  padding: 0.85rem 1rem;
+  color: $text-light;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+
+  &::placeholder {
+    color: rgba($text-dim, 0.5);
+  }
+
+  &:focus {
+    border-color: $primary;
+    box-shadow: 0 0 0 3px rgba($primary, 0.15);
+  }
+}
+
+.inputCorrect {
+  border-color: $success !important;
+  box-shadow: 0 0 0 3px rgba($success, 0.15) !important;
+}
+
+.inputWrong {
+  border-color: $danger !important;
+  box-shadow: 0 0 0 3px rgba($danger, 0.15) !important;
+}
+
+.submitBtn {
+  background: linear-gradient(135deg, $primary, darken($primary, 10%));
+  color: white;
+  border: none;
+  border-radius: 0.75rem;
+  padding: 0 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover:not(:disabled) {
+    box-shadow: 0 4px 15px rgba($primary, 0.4);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+// Feedback
+.feedback {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.25rem;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-top: 1.25rem;
+}
+
+.feedbackCorrect {
+  background: rgba($success, 0.12);
+  border: 1px solid rgba($success, 0.3);
+  color: $success;
+}
+
+.feedbackWrong {
+  background: rgba($danger, 0.12);
+  border: 1px solid rgba($danger, 0.3);
+  color: $danger;
+}
+
+// Next button
+.nextBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  background: linear-gradient(135deg, $primary, darken($primary, 10%));
+  color: white;
+  border: none;
+  border-radius: 0.75rem;
+  padding: 0.9rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 1rem;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba($primary, 0.4);
+  }
+}
+
+// Results screen
+.resultsCard {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1.5rem;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+
+  h2 {
+    color: $text-light;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.scoreCircle {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.25rem;
+  padding: 1.25rem 2rem;
+  border-radius: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.good {
+  background: rgba($success, 0.12);
+  border: 2px solid rgba($success, 0.3);
+}
+
+.bad {
+  background: rgba($danger, 0.12);
+  border: 2px solid rgba($danger, 0.3);
+}
+
+.scoreNum {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: $text-light;
+}
+
+.scoreTotal {
+  font-size: 1.2rem;
+  color: $text-dim;
+  font-weight: 500;
+}
+
+.scoreLabel {
+  color: $text-dim;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+// Breakdown
+.breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.breakdownItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 1rem;
+  border-radius: 0.65rem;
+  font-size: 0.85rem;
+}
+
+.correct {
+  background: rgba($success, 0.08);
+  border: 1px solid rgba($success, 0.15);
+}
+
+.incorrect {
+  background: rgba($danger, 0.08);
+  border: 1px solid rgba($danger, 0.15);
+}
+
+.breakdownNum {
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 0.4rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: $text-dim;
+}
+
+.breakdownAnswer {
+  flex: 1;
+  color: $text-light;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.correctAnswer {
+  color: $success;
+  font-weight: 500;
+  font-size: 0.8rem;
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  &::before {
+    content: "→ ";
+  }
+}
+
+.iconCorrect {
+  color: $success;
+  min-width: 18px;
+}
+
+.iconIncorrect {
+  color: $danger;
+  min-width: 18px;
+}
+
+.backBtn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: $text-light;
+  border-radius: 0.75rem;
+  padding: 0.85rem 2rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.12);
+  }
+}

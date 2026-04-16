@@ -1,0 +1,257 @@
+$bg-dark: #0f172a;
+$primary: #6366f1;
+$text-light: #f1f5f9;
+$text-dim: #94a3b8;
+$success: #10b981;
+
+.container {
+  min-height: 100vh;
+  background: $bg-dark;
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 3rem;
+}
+
+.orb1,
+.orb2 {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+.orb1 {
+  width: 400px;
+  height: 400px;
+  background: $primary;
+  top: -100px;
+  right: -100px;
+}
+
+.orb2 {
+  width: 350px;
+  height: 350px;
+  background: $success;
+  bottom: -100px;
+  left: -100px;
+}
+
+.contentWrapper {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+
+  h1 {
+    color: $text-light;
+    font-size: 2rem;
+    font-weight: 700;
+  }
+}
+
+.subtitle {
+  color: $text-dim;
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+}
+
+// Progress bar
+.progress {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.progressBar {
+  flex: 1;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, $primary, $success);
+  border-radius: 4px;
+  transition: width 0.4s ease;
+}
+
+.progressText {
+  color: $text-dim;
+  font-size: 0.85rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+// Flip card
+.cardArea {
+  display: flex;
+  justify-content: center;
+}
+
+.cardContainer {
+  width: 100%;
+  max-width: 450px;
+  height: 320px;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.cardInner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+
+  &.isFlipped {
+    transform: rotateY(180deg);
+  }
+}
+
+.cardFace {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 1.5rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.cardFront {
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+}
+
+.cardBack {
+  transform: rotateY(180deg);
+  gap: 1.5rem;
+}
+
+.badge {
+  background: rgba($primary, 0.2);
+  color: $primary;
+  padding: 0.3rem 0.8rem;
+  border-radius: 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.expression {
+  color: $text-light;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.hint {
+  color: $text-dim;
+  font-size: 0.85rem;
+}
+
+.sectionLabel {
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  color: #64748b;
+  margin-bottom: 0.4rem;
+  letter-spacing: 0.5px;
+}
+
+.definition {
+  color: $text-light;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.exampleBox {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  color: $text-dim;
+  font-style: italic;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+// Next button
+.nextBtnWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.nextBtn {
+  background: linear-gradient(135deg, $primary, darken($primary, 10%));
+  color: white;
+  border: none;
+  border-radius: 0.75rem;
+  padding: 0.85rem 3rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba($primary, 0.4);
+  }
+}
+
+// Empty / Finished state
+.emptyState {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: $text-dim;
+
+  h2 {
+    color: $text-light;
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+}
+
+.emptyIcon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.restartBtn {
+  margin-top: 1.5rem;
+  background: linear-gradient(135deg, $primary, darken($primary, 10%));
+  color: white;
+  border: none;
+  border-radius: 0.75rem;
+  padding: 0.85rem 2rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba($primary, 0.4);
+  }
+}
