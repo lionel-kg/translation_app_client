@@ -12,4 +12,4 @@ COPY . .
 EXPOSE 4100
 
 # Commande pour démarrer l'application
-CMD ["npm", "start"]
+CMD ["npm", "run", "dev"]
