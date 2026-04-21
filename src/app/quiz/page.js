@@ -1,13 +1,12 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { clsx } from "clsx";
 import { useRouter } from "next/navigation";
-import { HelpCircle, Pencil, Trophy } from "lucide-react";
 import styles from "./quiz.module.scss";
 import { generateQuiz, getQuizHistory } from "@/services/api/quiz";
 import ProtectedRoute from "@/app/components/ProtectedRoute";
+import PageHeader from "@/app/components/PageHeader";
 
-const QuizPage = () => {
+export default function QuizPage() {
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(null);
   const [error, setError] = useState("");
@@ -41,100 +40,61 @@ const QuizPage = () => {
 
   return (
     <ProtectedRoute>
-      <div className={styles.container}>
-        <div className={styles.orb1}></div>
-        <div className={styles.orb2}></div>
+      <PageHeader title="Quiz" subtitle="Test your memory" />
+      <div className={styles.content}>
+        {error && <div className={styles.error}>{error}</div>}
 
-        <div className={styles.contentWrapper}>
-          <header className={styles.header}>
-            <h1>Quiz</h1>
-            <p className={styles.subtitle}>
-              Test your vocabulary knowledge
-            </p>
-          </header>
-
-          {error && <div className={styles.error}>{error}</div>}
-
-          {/* Quiz type cards */}
-          <div className={styles.quizTypes}>
-            <div
-              className={clsx(styles.typeCard, styles.mcq)}
-              onClick={() => !loading && startQuiz("multiple_choice")}
-            >
-              <div className={styles.typeIcon}>
-                <HelpCircle size={32} />
-              </div>
-              <h3>Multiple Choice</h3>
-              <p>Match definitions to expressions. 4 options per question.</p>
-              <button
-                className={styles.startBtn}
-                disabled={loading === "multiple_choice"}
-              >
-                {loading === "multiple_choice" ? "Starting..." : "Start Quiz"}
-              </button>
-            </div>
-
-            <div
-              className={clsx(styles.typeCard, styles.fill)}
-              onClick={() => !loading && startQuiz("fill_in_the_blank")}
-            >
-              <div className={styles.typeIcon}>
-                <Pencil size={32} />
-              </div>
-              <h3>Fill in the Blank</h3>
-              <p>Complete sentences with the correct expression.</p>
-              <button
-                className={styles.startBtn}
-                disabled={loading === "fill_in_the_blank"}
-              >
-                {loading === "fill_in_the_blank"
-                  ? "Starting..."
-                  : "Start Quiz"}
-              </button>
-            </div>
-          </div>
-
-          {/* History */}
-          {history.length > 0 && (
-            <div className={styles.historySection}>
-              <h2>
-                <Trophy size={20} />
-                Quiz History
-              </h2>
-              <div className={styles.historyList}>
-                {history.map((quiz) => (
-                  <div key={quiz.id} className={styles.historyItem}>
-                    <div className={styles.historyInfo}>
-                      <span className={styles.historyType}>
-                        {quiz.type === "multiple_choice"
-                          ? "Multiple Choice"
-                          : "Fill in the Blank"}
-                      </span>
-                      <span className={styles.historyDate}>
-                        {new Date(quiz.completedAt).toLocaleDateString()}
-                      </span>
-                    </div>
-                    <div className={styles.historyScore}>
-                      <span
-                        className={clsx(
-                          styles.score,
-                          quiz.score / quiz.totalItems >= 0.7
-                            ? styles.scoreGood
-                            : styles.scoreBad,
-                        )}
-                      >
-                        {quiz.score}/{quiz.totalItems}
-                      </span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
+        {/* Quiz type cards */}
+        <div className={styles.typeGrid}>
+          <button
+            className={`${styles.typeCard} ${styles.typeCard_terra}`}
+            onClick={() => !loading && startQuiz("multiple_choice")}
+            disabled={loading === "multiple_choice"}
+          >
+            <div className={styles.typeIcon}>{"\u{1F3AF}"}</div>
+            <div className={styles.typeLabel}>Multiple choice</div>
+            <div className={styles.typeSub}>10 Q &middot; 4 options</div>
+          </button>
+          <button
+            className={`${styles.typeCard} ${styles.typeCard_blue}`}
+            onClick={() => !loading && startQuiz("fill_in_the_blank")}
+            disabled={loading === "fill_in_the_blank"}
+          >
+            <div className={styles.typeIcon}>{"\u270F\uFE0F"}</div>
+            <div className={styles.typeLabel}>Fill the blank</div>
+            <div className={styles.typeSub}>10 Q &middot; type it</div>
+          </button>
         </div>
+
+        {/* History */}
+        {history.length > 0 && (
+          <>
+            <div className={styles.historyLabel}>{"\u{1F3C6}"} History</div>
+            <div className={styles.historyList}>
+              {history.map((h) => {
+                const pct = h.score / h.totalItems;
+                const good = pct >= 0.8;
+                return (
+                  <div key={h.id} className={styles.historyItem}>
+                    <div className={`${styles.historyScore} ${good ? styles.historyScoreGood : styles.historyScoreWarn}`}>
+                      {h.score}/{h.totalItems}
+                    </div>
+                    <div className={styles.historyInfo}>
+                      <div className={styles.historyType}>
+                        {h.type === "multiple_choice" ? "Multiple choice" : "Fill blank"}
+                      </div>
+                      <div className={styles.historyDate}>
+                        {new Date(h.completedAt).toLocaleDateString()}
+                      </div>
+                    </div>
+                    <div className={styles.historyStar}>{good ? "\u2605" : "\u2022"}</div>
+                  </div>
+                );
+              })}
+            </div>
+          </>
+        )}
       </div>
     </ProtectedRoute>
   );
-};
-
-export default QuizPage;
+}

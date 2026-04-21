@@ -1,11 +1,11 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { resetPassword } from "@/services/api/auth";
 import styles from "./reset-password.module.scss";
 
-const ResetPasswordPage = () => {
+function ResetPasswordContent() {
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
 
@@ -20,26 +20,13 @@ const ResetPasswordPage = () => {
     setErrors([]);
 
     const validationErrors = [];
-    if (password.length < 8) {
-      validationErrors.push("Password must be at least 8 characters");
-    }
-    if (!/[A-Z]/.test(password)) {
-      validationErrors.push("Password must contain an uppercase letter");
-    }
-    if (!/[a-z]/.test(password)) {
-      validationErrors.push("Password must contain a lowercase letter");
-    }
-    if (!/[0-9]/.test(password)) {
-      validationErrors.push("Password must contain a number");
-    }
-    if (password !== confirmPassword) {
-      validationErrors.push("Passwords do not match");
-    }
+    if (password.length < 8) validationErrors.push("Password must be at least 8 characters");
+    if (!/[A-Z]/.test(password)) validationErrors.push("Password must contain an uppercase letter");
+    if (!/[a-z]/.test(password)) validationErrors.push("Password must contain a lowercase letter");
+    if (!/[0-9]/.test(password)) validationErrors.push("Password must contain a number");
+    if (password !== confirmPassword) validationErrors.push("Passwords do not match");
 
-    if (validationErrors.length > 0) {
-      setErrors(validationErrors);
-      return;
-    }
+    if (validationErrors.length > 0) { setErrors(validationErrors); return; }
 
     setLoading(true);
     try {
@@ -55,8 +42,6 @@ const ResetPasswordPage = () => {
   if (!token) {
     return (
       <div className={styles.container}>
-        <div className={styles.orb1}></div>
-        <div className={styles.orb2}></div>
         <div className={styles.card}>
           <div className={styles.header}>
             <h1>Invalid Link</h1>
@@ -72,9 +57,6 @@ const ResetPasswordPage = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.orb1}></div>
-      <div className={styles.orb2}></div>
-
       <div className={styles.card}>
         <div className={styles.header}>
           <h1>New Password</h1>
@@ -84,48 +66,27 @@ const ResetPasswordPage = () => {
         {success ? (
           <div className={styles.success}>
             <p>Your password has been reset successfully!</p>
-            <Link href="/login" className={styles.backLink}>
-              Sign In
-            </Link>
+            <Link href="/login" className={styles.backLink}>Sign In</Link>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className={styles.form}>
             {errors.length > 0 && (
               <div className={styles.errorList}>
                 {errors.map((err, i) => (
-                  <div key={i} className={styles.errorItem}>
-                    {err}
-                  </div>
+                  <div key={i} className={styles.errorItem}>{err}</div>
                 ))}
               </div>
             )}
-
             <div className={styles.field}>
               <label htmlFor="password">New Password</label>
-              <input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Min 8 chars, upper + lower + number"
-                required
-              />
+              <input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Min 8 chars, upper + lower + number" required />
             </div>
-
             <div className={styles.field}>
               <label htmlFor="confirmPassword">Confirm Password</label>
-              <input
-                id="confirmPassword"
-                type="password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                placeholder="Repeat your password"
-                required
-              />
+              <input id="confirmPassword" type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Repeat your password" required />
             </div>
-
             <button type="submit" className={styles.submitBtn} disabled={loading}>
-              {loading ? "Resetting..." : "Reset Password"}
+              {loading ? "Resetting..." : "Reset Password \u2192"}
             </button>
           </form>
         )}
@@ -136,6 +97,12 @@ const ResetPasswordPage = () => {
       </div>
     </div>
   );
-};
+}
 
-export default ResetPasswordPage;
+export default function ResetPasswordPage() {
+  return (
+    <Suspense fallback={<div className={styles.container}><div className={styles.card}><div className={styles.header}><h1>Loading...</h1></div></div></div>}>
+      <ResetPasswordContent />
+    </Suspense>
+  );
+}

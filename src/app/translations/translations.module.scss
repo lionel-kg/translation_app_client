@@ -1,317 +1,283 @@
-/* translations.module.scss */
+$cream: #f5f1e6;
+$paper: #fbf7ec;
+$ink: #1e1a15;
+$sub: #6b6257;
+$line: #d9d1bd;
+$terra: #c75d3a;
+$stamp: #b03a2e;
+$sage: #6f8f6a;
+$gold: #d4a84a;
+$blue: #3a5a8a;
 
-// --- Variables & Config ---
-$bg-dark: #0f172a;
-$text-light: #f1f5f9;
-$text-dim: #94a3b8;
-$primary: #6366f1; // Indigo
-$secondary: #ec4899; // Pink
-$success: #10b981; // Emerald Green
-
-// --- Mixin Glassmorphism ---
-@mixin glass-effect {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-}
-
-// --- Structure Globale ---
-.container {
-  min-height: 100vh;
-  background-color: $bg-dark;
-  color: $text-light;
-  padding: 2rem;
-  font-family: "Inter", sans-serif;
-  position: relative;
-  overflow-x: hidden;
-}
-
-// --- Background Orbs ---
-.orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  z-index: 0;
-  opacity: 0.4;
-  animation: float 10s infinite ease-in-out;
-}
-
-.orb1 {
-  top: -10%;
-  left: -10%;
-  width: 300px;
-  height: 300px;
-  background: $primary;
-}
-
-.orb2 {
-  bottom: -10%;
-  right: -10%;
-  width: 400px;
-  height: 400px;
-  background: $secondary;
-  animation-delay: -5s;
-}
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translate(0, 0);
-  }
-  50% {
-    transform: translate(20px, 30px);
-  }
-}
-
-.contentWrapper {
-  position: relative;
-  z-index: 1;
-  max-width: 1200px;
+.content {
+  padding: 0 20px 20px;
+  max-width: 600px;
   margin: 0 auto;
 }
 
-// --- Header ---
-.header {
-  margin-bottom: 3rem;
-  text-align: center; // Centré pour changer un peu
-
-  h1 {
-    font-size: 3rem;
-    font-weight: 800;
-    margin: 0;
-    background: linear-gradient(to right, #fff, #94a3b8);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
+.meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  color: $sub;
+  text-transform: uppercase;
+  margin-bottom: 10px;
 }
 
-// --- Grille Bento ---
-.grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  }
+// List
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-// --- Carte (Tuile) ---
 .card {
-  @include glass-effect;
-  border-radius: 1.5rem;
-  padding: 1.5rem;
+  background: $paper;
+  border: 1px solid $line;
+  border-radius: 4px;
+  padding: 14px;
   cursor: pointer;
-  transition: transform 0.3s ease, background 0.3s ease;
   position: relative;
-  overflow: hidden;
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.2s;
 
   &:hover {
-    transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.06);
   }
 
-  // Indicateur visuel "Fait" (Bordure verte subtile)
-  &.cardDone {
-    border-color: rgba($success, 0.4);
-    box-shadow: 0 0 15px rgba($success, 0.1);
-  }
-
-  h3 {
-    margin: 0 0 1rem 0;
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: white;
-  }
-
-  .preview {
-    font-size: 0.95rem;
-    color: $text-dim;
-    line-height: 1.5;
-    margin-bottom: 1.5rem;
-    // Coupe le texte proprement
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.8rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: 1rem;
-    color: #64748b;
-
-    .status {
-      color: $success;
-      background: rgba($success, 0.1);
-      padding: 0.25rem 0.75rem;
-      border-radius: 99px;
-      font-weight: bold;
-    }
+  &Done {
+    box-shadow: inset 0 0 0 1px rgba($sage, 0.3);
   }
 }
 
-// --- MODAL (Dark Theme) ---
-.modalOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7); // Fond très sombre
-  backdrop-filter: blur(5px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-  padding: 1rem;
-}
-
-.modalContent {
-  @include glass-effect; // La modale est aussi en verre !
-  background: rgba(15, 23, 42, 0.95); // Plus opaque pour la lisibilité
-  padding: 2rem;
-  border-radius: 1.5rem;
-  width: 100%;
-  max-width: 700px;
-  max-height: 90vh;
-  overflow-y: auto;
-  position: relative;
-  color: $text-light;
-
-  h2 {
-    margin-top: 0;
-    margin-bottom: 1.5rem;
-    padding-right: 3rem;
-    color: white;
-  }
-}
-
-.closeBtn {
+.doneStamp {
   position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
+  top: 10px;
+  right: 10px;
+  transform: rotate(-8deg);
+}
+
+.doneStampInner {
+  border: 1.5px solid $sage;
+  color: $sage;
+  padding: 2px 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  background: rgba($sage, 0.07);
+  border-radius: 1px;
+}
+
+.chipRow {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.chip {
+  display: inline-flex;
+  padding: 3px 9px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  border-radius: 2px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  color: #fff;
+}
+
+.chipSage { background: $sage; }
+.chipGold { background: $gold; color: $ink; }
+.chipTerra { background: $terra; }
+.chipBlue { background: $blue; }
+
+.cardTitle {
+  font-family: 'Fraunces', serif;
+  font-size: 17px;
+  font-weight: 500;
+  color: $ink;
+  margin-bottom: 4px;
+  line-height: 1.2;
+}
+
+.cardPreview {
+  font-size: 12px;
+  color: $sub;
+  line-height: 1.5;
+  font-style: italic;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+// Detail view
+.backBtn {
+  background: transparent;
   border: none;
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
+  color: $sub;
+  padding: 8px 0 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1px;
   cursor: pointer;
+  text-transform: uppercase;
+}
+
+.detailTitle {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 26px;
+  color: $ink;
+  margin: 0 0 16px;
+  line-height: 1.1;
+}
+
+.sourceBox {
+  padding: 16px;
+  background: $paper;
+  border: 1px solid $line;
+  border-radius: 4px;
+  position: relative;
+  background-image: repeating-linear-gradient(
+    transparent,
+    transparent 23px,
+    rgba($line, 0.33) 23px,
+    rgba($line, 0.33) 24px
+  );
+  background-position: 0 6px;
+}
+
+.sourceLine {
+  position: absolute;
+  left: 22px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: $terra;
+  opacity: 0.5;
+}
+
+.sourceText {
+  padding-left: 14px;
+  font-family: 'Fraunces', serif;
+  font-size: 15px;
+  color: $ink;
+  line-height: 24px;
+
+  b, strong {
+    color: $terra;
+    font-weight: 600;
+  }
+}
+
+.responseSection {
+  margin-top: 16px;
+}
+
+.responseLabel {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  color: $terra;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 130px;
+  padding: 14px;
+  background: $paper;
+  border: 1px solid $line;
+  border-radius: 4px;
+  resize: none;
+  color: $ink;
+  font-family: 'Fraunces', serif;
+  font-size: 15px;
+  line-height: 1.5;
+  outline: none;
+  transition: border-color 0.2s;
+
+  &:focus {
+    border-color: $terra;
+  }
+}
+
+.charCount {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: $sub;
+  letter-spacing: 0.5px;
+  margin-top: 4px;
+}
+
+.submitBtn {
+  margin-top: 14px;
+  width: 100%;
+  padding: 14px;
+  background: $terra;
+  color: #fdf6e6;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Fraunces', serif;
+  font-size: 16px;
+  font-weight: 600;
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.15);
+  transition: box-shadow 0.2s;
+
+  &:hover:not(:disabled) {
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.feedback {
+  margin-top: 14px;
+  padding: 14px;
+  background: rgba($sage, 0.13);
+  border: 1px solid $sage;
+  border-radius: 4px;
+}
+
+.feedbackHeader {
   display: flex;
+  gap: 8px;
   align-items: center;
-  justify-content: center;
-  transition: all 0.2s;
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: rotate(90deg);
-  }
+  margin-bottom: 6px;
 }
 
-.originalText {
-  line-height: 1.7;
-  margin-bottom: 2rem;
-  padding: 1.5rem;
-  background: rgba(0, 0, 0, 0.3); // Fond sombre incrusté
-  border-radius: 1rem;
-  border-left: 4px solid $primary;
-  font-size: 1.05rem;
-  color: #e2e8f0;
+.feedbackTitle {
+  font-family: 'Fraunces', serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: $ink;
 }
 
-.inputGroup {
-  margin-bottom: 2rem;
-
-  label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-    color: $secondary; // Touche de couleur
-    text-transform: uppercase;
-    font-size: 0.8rem;
-    letter-spacing: 0.05em;
-  }
-
-  textarea {
-    width: 100%;
-    height: 200px;
-    padding: 1rem;
-    border-radius: 1rem;
-    background: rgba(0, 0, 0, 0.2); // Input sombre
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: white;
-    font-family: inherit;
-    font-size: 1rem;
-    resize: vertical;
-    transition: all 0.3s;
-
-    &:focus {
-      outline: none;
-      border-color: $primary;
-      background: rgba(0, 0, 0, 0.4);
-      box-shadow: 0 0 0 4px rgba($primary, 0.1);
-    }
-  }
+.feedbackText {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 14px;
+  color: $sub;
+  line-height: 1.5;
 }
 
-.actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 1rem;
-
-  .btnCancel {
-    padding: 0.75rem 1.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: transparent;
-    color: $text-dim;
-    border-radius: 0.75rem;
-    cursor: pointer;
-    font-weight: 500;
-
-    &:hover {
-      background: rgba(255, 255, 255, 0.05);
-      color: white;
-    }
-  }
-
-  .btnSave {
-    padding: 0.75rem 2rem;
-    border: none;
-    background: $primary;
-    color: white;
-    border-radius: 0.75rem;
-    cursor: pointer;
-    font-weight: 600;
-    transition: all 0.2s;
-    box-shadow: 0 4px 14px 0 rgba($primary, 0.39);
-
-    &:hover {
-      background: lighten($primary, 5%);
-      transform: translateY(-2px);
-    }
-
-    &:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-  }
-}
-
-.coachNotes {
-  margin-top: 2rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding-top: 1.5rem;
-  font-size: 0.95rem;
-  color: #e2e8f0;
-  background: rgba($primary, 0.1); // Tint bleu
-  padding: 1.5rem;
-  border-radius: 1rem;
-  line-height: 1.6;
+.coachNote {
+  margin-top: 12px;
+  padding: 10px;
+  background: rgba($gold, 0.1);
+  border: 1px dashed $gold;
+  border-radius: 4px;
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 13px;
+  color: $ink;
+  line-height: 1.4;
 }

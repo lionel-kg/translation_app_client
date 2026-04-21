@@ -1,443 +1,325 @@
-$bg-dark: #0f172a;
-$primary: #6366f1;
-$secondary: #ec4899;
-$text-light: #f1f5f9;
-$text-dim: #94a3b8;
-$success: #10b981;
-$danger: #ef4444;
+$cream: #f5f1e6;
+$paper: #fbf7ec;
+$ink: #1e1a15;
+$sub: #6b6257;
+$line: #d9d1bd;
+$terra: #c75d3a;
+$stamp: #b03a2e;
+$sage: #6f8f6a;
+$gold: #d4a84a;
+$blue: #3a5a8a;
 
-.container {
-  min-height: 100vh;
-  background: $bg-dark;
-  position: relative;
-  overflow: hidden;
-  padding-bottom: 3rem;
-}
-
-.orb1,
-.orb2 {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(100px);
-  opacity: 0.15;
-  pointer-events: none;
-}
-
-.orb1 {
-  width: 400px;
-  height: 400px;
-  background: $primary;
-  top: -100px;
-  right: -100px;
-}
-
-.orb2 {
-  width: 350px;
-  height: 350px;
-  background: $secondary;
-  bottom: -100px;
-  left: -100px;
-}
-
-.contentWrapper {
-  max-width: 650px;
+.content {
+  padding: 0 20px 20px;
+  max-width: 600px;
   margin: 0 auto;
-  padding: 2rem 1.5rem;
-  position: relative;
-  z-index: 1;
 }
 
-.loading {
-  color: $text-dim;
+.emptyState {
   text-align: center;
-  padding: 4rem 2rem;
-  font-size: 1.1rem;
+  padding: 40px;
+  color: $sub;
+  font-family: 'Fraunces', serif;
+  font-size: 16px;
 }
 
 // Progress
-.progress {
+.progressRow {
   display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 2rem;
+  gap: 4px;
+  margin-bottom: 18px;
 }
 
-.progressBar {
+.progressDot {
   flex: 1;
-  height: 8px;
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 4px;
-  overflow: hidden;
+  height: 4px;
+  border-radius: 2px;
+  background: $line;
+  transition: background 0.3s;
+
+  &Active {
+    background: $terra;
+  }
 }
 
-.progressFill {
-  height: 100%;
-  background: linear-gradient(90deg, $primary, $secondary);
-  border-radius: 4px;
-  transition: width 0.4s ease;
-}
-
-.progressText {
-  color: $text-dim;
-  font-size: 0.85rem;
-  font-weight: 500;
-  white-space: nowrap;
-}
-
-// Question card
-.questionCard {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 1.5rem;
-  padding: 2rem;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-}
-
-.questionType {
-  display: inline-block;
-  background: rgba($primary, 0.15);
-  color: $primary;
-  padding: 0.3rem 0.85rem;
-  border-radius: 1rem;
-  font-size: 0.75rem;
-  font-weight: 600;
+.questionMeta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  color: $sub;
   text-transform: uppercase;
-  margin-bottom: 1.25rem;
+  margin-bottom: 4px;
 }
 
 .questionText {
-  color: $text-light;
-  font-size: 1.2rem;
-  font-weight: 600;
-  line-height: 1.6;
-  margin-bottom: 1.75rem;
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 24px;
+  color: $ink;
+  line-height: 1.2;
+  margin-bottom: 18px;
+
+  em {
+    color: $terra;
+    font-family: 'Instrument Serif', serif;
+  }
 }
 
 // MCQ Options
 .options {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 8px;
 }
 
-.optionBtn {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 0.85rem;
-  padding: 1rem 1.25rem;
-  color: $text-light;
-  cursor: pointer;
-  transition: all 0.2s;
+.option {
+  padding: 12px 14px;
+  background: $paper;
+  border: 1.5px solid $line;
+  border-radius: 4px;
   text-align: left;
-  width: 100%;
+  cursor: pointer;
+  font-family: 'Fraunces', serif;
+  font-size: 15px;
+  color: $ink;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: border-color 0.2s, background 0.2s;
 
   &:hover:not(:disabled) {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba($primary, 0.3);
+    border-color: $terra;
   }
 
-  &:disabled {
-    cursor: default;
+  &Correct {
+    background: rgba($sage, 0.13);
+    border-color: $sage;
+  }
+
+  &Wrong {
+    background: rgba($stamp, 0.13);
+    border-color: $stamp;
+  }
+
+  &Dim {
+    opacity: 0.5;
   }
 }
 
 .optionLetter {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1.5px solid $line;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
-  min-width: 28px;
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 0.5rem;
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: $text-dim;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  flex-shrink: 0;
 }
 
-.optionText {
-  font-size: 0.92rem;
-  line-height: 1.5;
-  padding-top: 0.2rem;
-}
-
-.optionCorrect {
-  background: rgba($success, 0.12) !important;
-  border-color: rgba($success, 0.4) !important;
-
-  .optionLetter {
-    background: $success;
-    color: white;
-  }
-}
-
-.optionWrong {
-  background: rgba($danger, 0.12) !important;
-  border-color: rgba($danger, 0.4) !important;
-
-  .optionLetter {
-    background: $danger;
-    color: white;
-  }
-}
-
-.optionDim {
-  opacity: 0.4;
-}
-
-// Fill in the blank
+// Fill form
 .fillForm {
   display: flex;
-  gap: 0.75rem;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .fillInput {
-  flex: 1;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 0.75rem;
-  padding: 0.85rem 1rem;
-  color: $text-light;
-  font-size: 1rem;
+  width: 100%;
+  padding: 12px 14px;
+  background: $paper;
+  border: 1.5px solid $line;
+  border-radius: 4px;
+  color: $ink;
+  font-family: 'Fraunces', serif;
+  font-size: 15px;
   outline: none;
   transition: border-color 0.2s;
 
-  &::placeholder {
-    color: rgba($text-dim, 0.5);
-  }
-
   &:focus {
-    border-color: $primary;
-    box-shadow: 0 0 0 3px rgba($primary, 0.15);
+    border-color: $terra;
   }
+
+  &Correct { border-color: $sage; }
+  &Wrong { border-color: $stamp; }
 }
 
-.inputCorrect {
-  border-color: $success !important;
-  box-shadow: 0 0 0 3px rgba($success, 0.15) !important;
-}
-
-.inputWrong {
-  border-color: $danger !important;
-  box-shadow: 0 0 0 3px rgba($danger, 0.15) !important;
-}
-
-.submitBtn {
-  background: linear-gradient(135deg, $primary, darken($primary, 10%));
-  color: white;
+.fillSubmit {
+  padding: 10px 18px;
+  background: $terra;
+  color: #fdf6e6;
   border: none;
-  border-radius: 0.75rem;
-  padding: 0 1.5rem;
-  font-size: 0.95rem;
-  font-weight: 600;
+  border-radius: 4px;
   cursor: pointer;
-  transition: all 0.2s;
-
-  &:hover:not(:disabled) {
-    box-shadow: 0 4px 15px rgba($primary, 0.4);
-  }
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  align-self: flex-end;
 
   &:disabled {
-    opacity: 0.5;
+    opacity: 0.4;
     cursor: not-allowed;
   }
 }
 
 // Feedback
-.feedback {
+.feedbackBar {
+  margin-top: 12px;
+  padding: 10px 14px;
+  border-radius: 4px;
+  font-family: 'Fraunces', serif;
+  font-size: 15px;
+  font-weight: 600;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.85rem 1.25rem;
-  border-radius: 0.75rem;
-  font-weight: 600;
-  font-size: 0.95rem;
-  margin-top: 1.25rem;
-}
+  gap: 8px;
 
-.feedbackCorrect {
-  background: rgba($success, 0.12);
-  border: 1px solid rgba($success, 0.3);
-  color: $success;
-}
+  &Correct {
+    background: rgba($sage, 0.13);
+    border: 1px solid $sage;
+    color: $sage;
+  }
 
-.feedbackWrong {
-  background: rgba($danger, 0.12);
-  border: 1px solid rgba($danger, 0.3);
-  color: $danger;
+  &Wrong {
+    background: rgba($stamp, 0.13);
+    border: 1px solid $stamp;
+    color: $stamp;
+  }
 }
 
 // Next button
 .nextBtn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
+  margin-top: 14px;
   width: 100%;
-  background: linear-gradient(135deg, $primary, darken($primary, 10%));
-  color: white;
+  padding: 14px;
+  background: $terra;
+  color: #fdf6e6;
   border: none;
-  border-radius: 0.75rem;
-  padding: 0.9rem;
-  font-size: 1rem;
-  font-weight: 600;
+  border-radius: 4px;
   cursor: pointer;
-  transition: all 0.2s;
-  margin-top: 1rem;
-
-  &:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 15px rgba($primary, 0.4);
-  }
+  font-family: 'Fraunces', serif;
+  font-size: 16px;
+  font-weight: 600;
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.15);
 }
 
-// Results screen
+// Results
 .resultsCard {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 1.5rem;
-  padding: 2.5rem 2rem;
   text-align: center;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  padding: 20px 0;
+}
 
-  h2 {
-    color: $text-light;
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin-bottom: 1.5rem;
-  }
+.resultsTitle {
+  font-family: 'Fraunces', serif;
+  font-size: 26px;
+  font-weight: 500;
+  color: $ink;
+  margin-bottom: 20px;
 }
 
 .scoreCircle {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 0.25rem;
-  padding: 1.25rem 2rem;
-  border-radius: 1.25rem;
-  margin-bottom: 1rem;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+  border: 3px solid;
 }
 
-.good {
-  background: rgba($success, 0.12);
-  border: 2px solid rgba($success, 0.3);
+.scoreGood {
+  border-color: $sage;
+  background: rgba($sage, 0.1);
 }
 
-.bad {
-  background: rgba($danger, 0.12);
-  border: 2px solid rgba($danger, 0.3);
+.scoreBad {
+  border-color: $stamp;
+  background: rgba($stamp, 0.1);
 }
 
 .scoreNum {
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: $text-light;
+  font-family: 'Fraunces', serif;
+  font-size: 36px;
+  font-weight: 700;
+  color: $ink;
+  line-height: 1;
 }
 
 .scoreTotal {
-  font-size: 1.2rem;
-  color: $text-dim;
-  font-weight: 500;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: $sub;
 }
 
 .scoreLabel {
-  color: $text-dim;
-  font-size: 1.1rem;
-  margin-bottom: 2rem;
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 18px;
+  color: $terra;
+  margin-bottom: 20px;
 }
 
 // Breakdown
 .breakdown {
+  text-align: left;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  margin-bottom: 2rem;
-  text-align: left;
+  gap: 4px;
+  margin-top: 16px;
 }
 
 .breakdownItem {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.65rem 1rem;
-  border-radius: 0.65rem;
-  font-size: 0.85rem;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-family: 'Fraunces', serif;
+  font-size: 14px;
 }
 
-.correct {
-  background: rgba($success, 0.08);
-  border: 1px solid rgba($success, 0.15);
+.breakdownCorrect {
+  background: rgba($sage, 0.08);
+  color: $sage;
 }
 
-.incorrect {
-  background: rgba($danger, 0.08);
-  border: 1px solid rgba($danger, 0.15);
+.breakdownWrong {
+  background: rgba($stamp, 0.08);
+  color: $stamp;
 }
 
 .breakdownNum {
-  width: 24px;
-  height: 24px;
-  min-width: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 0.4rem;
-  font-size: 0.75rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
   font-weight: 700;
-  color: $text-dim;
+  min-width: 18px;
 }
 
 .breakdownAnswer {
   flex: 1;
-  color: $text-light;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  color: $ink;
 }
 
-.correctAnswer {
-  color: $success;
-  font-weight: 500;
-  font-size: 0.8rem;
-  max-width: 120px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-
-  &::before {
-    content: "→ ";
-  }
-}
-
-.iconCorrect {
-  color: $success;
-  min-width: 18px;
-}
-
-.iconIncorrect {
-  color: $danger;
-  min-width: 18px;
+.breakdownCorrectAnswer {
+  color: $sage;
+  font-style: italic;
+  font-size: 12px;
 }
 
 .backBtn {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: $text-light;
-  border-radius: 0.75rem;
-  padding: 0.85rem 2rem;
-  font-size: 0.95rem;
-  font-weight: 600;
+  margin-top: 20px;
+  padding: 12px 24px;
+  background: $paper;
+  border: 1px solid $line;
+  border-radius: 4px;
   cursor: pointer;
-  transition: all 0.2s;
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.12);
-  }
+  font-family: 'Fraunces', serif;
+  font-size: 15px;
+  color: $ink;
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.04);
 }

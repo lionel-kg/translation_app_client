@@ -1,0 +1,274 @@
+$cream: #f5f1e6;
+$paper: #fbf7ec;
+$ink: #1e1a15;
+$sub: #6b6257;
+$line: #d9d1bd;
+$terra: #c75d3a;
+$stamp: #b03a2e;
+$sage: #6f8f6a;
+$gold: #d4a84a;
+$blue: #3a5a8a;
+
+.content {
+  padding: 0 20px 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+// Hero card
+.hero {
+  background: $terra;
+  color: #fdf6e6;
+  border-radius: 4px;
+  padding: 18px 18px 22px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.heroMeta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  opacity: 0.75;
+  text-transform: uppercase;
+}
+
+.heroTitle {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 1.05;
+  margin: 8px 0 6px;
+}
+
+.heroName {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+}
+
+.heroSub {
+  font-size: 13px;
+  opacity: 0.88;
+  line-height: 1.4;
+}
+
+// Fox stamp
+.stamp {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 64px;
+  height: 64px;
+  transform: rotate(8deg);
+}
+
+.stampInner {
+  width: 100%;
+  height: 100%;
+  background: $stamp;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  border: 1.5px dashed rgba(255, 255, 255, 0.6);
+}
+
+// Streak
+.streakRow {
+  margin-top: 16px;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.streakLabel {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  opacity: 0.7;
+  margin-right: 6px;
+}
+
+.streakDot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1.5px solid #fdf6e6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8px;
+  color: $terra;
+  font-weight: 900;
+  background: transparent;
+
+  &Active {
+    background: #fdf6e6;
+  }
+}
+
+.streakCount {
+  margin-left: 6px;
+  font-family: 'Fraunces', serif;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+// Section label
+.sectionLabel {
+  margin-top: 18px;
+  margin-bottom: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  color: $sub;
+  text-transform: uppercase;
+}
+
+// Featured card
+.featuredCard {
+  display: block;
+  background: $paper;
+  border: 1px solid $line;
+  border-radius: 4px;
+  padding: 14px;
+  cursor: pointer;
+  position: relative;
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.04);
+  text-decoration: none;
+  transition: box-shadow 0.2s;
+
+  &:hover {
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.06);
+  }
+}
+
+.chipRow {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  border-radius: 2px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  color: #fff;
+}
+
+.chipTerra { background: $terra; }
+.chipSage { background: $sage; }
+.chipGold { background: $gold; color: $ink; }
+.chipBlue { background: $blue; }
+
+.featuredTitle {
+  font-family: 'Fraunces', serif;
+  font-size: 17px;
+  font-weight: 500;
+  color: $ink;
+  line-height: 1.3;
+  margin-bottom: 6px;
+}
+
+.featuredPreview {
+  font-size: 12px;
+  color: $sub;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+// Quick links grid
+.quickGrid {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.quickCard {
+  background: $paper;
+  border: 1px solid $line;
+  border-radius: 4px;
+  padding: 12px;
+  text-align: left;
+  cursor: pointer;
+  text-decoration: none;
+  transition: box-shadow 0.2s;
+
+  &:hover {
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.06);
+  }
+}
+
+.quickIcon {
+  width: 34px;
+  height: 34px;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  margin-bottom: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.quickIcon_sage { background: $sage; }
+.quickIcon_gold { background: $gold; }
+.quickIcon_blue { background: $blue; }
+.quickIcon_terra { background: $terra; }
+
+.quickLabel {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: $ink;
+}
+
+.quickSub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: $sub;
+  margin-top: 2px;
+}
+
+// Fox note
+.foxNote {
+  margin-top: 18px;
+  padding: 14px;
+  background: $paper;
+  border: 1px dashed $line;
+  border-radius: 4px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.foxEmoji {
+  font-size: 24px;
+}
+
+.foxText {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 15px;
+  color: $ink;
+  line-height: 1.35;
+}
+
+.foxSig {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: $sub;
+  margin-top: 4px;
+  letter-spacing: 1px;
+}

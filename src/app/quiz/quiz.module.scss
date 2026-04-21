@@ -1,159 +1,51 @@
-$bg-dark: #0f172a;
-$primary: #6366f1;
-$secondary: #ec4899;
-$text-light: #f1f5f9;
-$text-dim: #94a3b8;
-$success: #10b981;
-$danger: #ef4444;
+$cream: #f5f1e6;
+$paper: #fbf7ec;
+$ink: #1e1a15;
+$sub: #6b6257;
+$line: #d9d1bd;
+$terra: #c75d3a;
+$sage: #6f8f6a;
+$gold: #d4a84a;
+$blue: #3a5a8a;
 
-.container {
-  min-height: 100vh;
-  background: $bg-dark;
-  position: relative;
-  overflow: hidden;
-  padding-bottom: 3rem;
-}
-
-.orb1,
-.orb2 {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(100px);
-  opacity: 0.15;
-  pointer-events: none;
-}
-
-.orb1 {
-  width: 400px;
-  height: 400px;
-  background: $secondary;
-  top: -100px;
-  left: -100px;
-}
-
-.orb2 {
-  width: 350px;
-  height: 350px;
-  background: $primary;
-  bottom: -100px;
-  right: -100px;
-}
-
-.contentWrapper {
-  max-width: 700px;
+.content {
+  padding: 0 20px 20px;
+  max-width: 600px;
   margin: 0 auto;
-  padding: 2rem 1.5rem;
-  position: relative;
-  z-index: 1;
-}
-
-.header {
-  text-align: center;
-  margin-bottom: 2rem;
-
-  h1 {
-    color: $text-light;
-    font-size: 2rem;
-    font-weight: 700;
-  }
-}
-
-.subtitle {
-  color: $text-dim;
-  margin-top: 0.5rem;
-  font-size: 0.95rem;
 }
 
 .error {
-  background: rgba($danger, 0.15);
-  border: 1px solid rgba($danger, 0.3);
-  color: $danger;
-  padding: 0.75rem 1rem;
-  border-radius: 0.75rem;
-  font-size: 0.85rem;
-  margin-bottom: 1.5rem;
-  text-align: center;
+  padding: 10px 14px;
+  background: rgba($terra, 0.1);
+  border: 1px solid $terra;
+  border-radius: 4px;
+  color: $terra;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  margin-bottom: 14px;
 }
 
-// Quiz type selection
-.quizTypes {
+// Type cards
+.typeGrid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-  margin-bottom: 3rem;
-
-  @media (min-width: 600px) {
-    grid-template-columns: 1fr 1fr;
-  }
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
 }
 
 .typeCard {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 1.25rem;
-  padding: 2rem;
-  cursor: pointer;
-  transition: all 0.3s;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 1rem;
-
-  &:hover {
-    transform: translateY(-3px);
-    border-color: rgba($primary, 0.3);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-  }
-
-  h3 {
-    color: $text-light;
-    font-size: 1.2rem;
-    font-weight: 600;
-  }
-
-  p {
-    color: $text-dim;
-    font-size: 0.85rem;
-    line-height: 1.5;
-  }
-}
-
-.typeIcon {
-  width: 60px;
-  height: 60px;
-  border-radius: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.mcq .typeIcon {
-  background: rgba($primary, 0.15);
-  color: $primary;
-}
-
-.fill .typeIcon {
-  background: rgba($secondary, 0.15);
-  color: $secondary;
-}
-
-.startBtn {
-  background: linear-gradient(135deg, $primary, darken($primary, 10%));
-  color: white;
+  color: #fdf6e6;
   border: none;
-  border-radius: 0.65rem;
-  padding: 0.7rem 1.5rem;
-  font-size: 0.9rem;
-  font-weight: 600;
+  border-radius: 4px;
+  padding: 16px;
   cursor: pointer;
-  transition: all 0.2s;
-  margin-top: 0.5rem;
+  text-align: left;
+  position: relative;
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
+  aspect-ratio: 1;
+  transition: box-shadow 0.2s;
 
   &:hover:not(:disabled) {
-    box-shadow: 0 4px 15px rgba($primary, 0.4);
+    box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.15);
   }
 
   &:disabled {
@@ -162,65 +54,90 @@ $danger: #ef4444;
   }
 }
 
-// History section
-.historySection {
-  h2 {
-    color: $text-light;
-    font-size: 1.3rem;
-    font-weight: 600;
-    margin-bottom: 1.25rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
+.typeCard_terra { background: $terra; }
+.typeCard_blue { background: $blue; }
+
+.typeIcon {
+  font-size: 26px;
+  margin-bottom: 6px;
+}
+
+.typeLabel {
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+
+.typeSub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  opacity: 0.75;
+  letter-spacing: 0.5px;
+}
+
+// History
+.historyLabel {
+  margin-top: 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  color: $sub;
+  text-transform: uppercase;
+  margin-bottom: 10px;
 }
 
 .historyList {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 8px;
 }
 
 .historyItem {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  border-radius: 0.85rem;
-  padding: 1rem 1.25rem;
+  background: $paper;
+  border: 1px solid $line;
+  border-radius: 4px;
+  padding: 10px 12px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 10px;
 }
 
-.historyInfo {
+.historyScore {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: #fff;
   display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-size: 11px;
+  flex-shrink: 0;
+}
+
+.historyScoreGood { background: $sage; }
+.historyScoreWarn { background: $gold; }
+
+.historyInfo {
+  flex: 1;
 }
 
 .historyType {
-  color: $text-light;
-  font-size: 0.9rem;
-  font-weight: 500;
+  font-family: 'Fraunces', serif;
+  font-size: 14px;
+  color: $ink;
 }
 
 .historyDate {
-  color: $text-dim;
-  font-size: 0.8rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: $sub;
+  letter-spacing: 0.5px;
 }
 
-.score {
-  font-size: 1.1rem;
-  font-weight: 700;
-  padding: 0.3rem 0.8rem;
-  border-radius: 0.5rem;
-}
-
-.scoreGood {
-  background: rgba($success, 0.15);
-  color: $success;
-}
-
-.scoreBad {
-  background: rgba($danger, 0.15);
-  color: $danger;
+.historyStar {
+  font-size: 18px;
+  color: $gold;
 }

@@ -1,50 +1,40 @@
-$bg-dark: #0f172a;
-$text-light: #f1f5f9;
-$text-dim: #94a3b8;
-$primary: #6366f1; // Indigo
-$secondary: #ec4899; // Pink
-$success: #10b981; // Emerald Green
+// Paper & Stamps Design System
+// Palette: cream / ink / terracotta / stamp-red / sage / gold / blue
 
-// :root {
-//   --background: #ffffff;
-//   --foreground: #171717;
-// }
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap');
 
-// @media (prefers-color-scheme: dark) {
-//   :root {
-//     --background: #0a0a0a;
-//     --foreground: #ededed;
-//   }
-// }
+$cream: #f5f1e6;
+$paper: #fbf7ec;
+$ink: #1e1a15;
+$sub: #6b6257;
+$line: #d9d1bd;
+$terra: #c75d3a;
+$stamp: #b03a2e;
+$sage: #6f8f6a;
+$gold: #d4a84a;
+$blue: #3a5a8a;
 
-@mixin glass-effect {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-}
-
-html,
-body {
-  width: 100vw;
-  // height: 100vh;
-  overflow-x: hidden;
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
   min-height: 100vh;
+  overflow-x: hidden;
+  background: $cream;
+  color: $ink;
 }
 
 body {
-  color: rgba(0, 0, 0, 0.43);
-  padding-top: 70px;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  padding-bottom: 80px;
 }
 
 * {
   box-sizing: border-box;
-  padding: 0;
   margin: 0;
+  padding: 0;
 }
 
 a {
@@ -52,8 +42,7 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+@keyframes confetti-fly {
+  0% { transform: translate(-50%, -50%) rotate(0deg); opacity: 1; }
+  100% { transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) rotate(var(--rot)); opacity: 0; }
 }

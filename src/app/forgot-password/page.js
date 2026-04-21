@@ -26,9 +26,6 @@ const ForgotPasswordPage = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.orb1}></div>
-      <div className={styles.orb2}></div>
-
       <div className={styles.card}>
         <div className={styles.header}>
           <h1>Reset Password</h1>
@@ -38,28 +35,17 @@ const ForgotPasswordPage = () => {
         {sent ? (
           <div className={styles.success}>
             <p>If an account with that email exists, a reset link has been sent. Check your inbox.</p>
-            <Link href="/login" className={styles.backLink}>
-              Back to Sign In
-            </Link>
+            <Link href="/login" className={styles.backLink}>Back to Sign In</Link>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className={styles.form}>
             {error && <div className={styles.error}>{error}</div>}
-
             <div className={styles.field}>
               <label htmlFor="email">Email</label>
-              <input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="you@example.com"
-                required
-              />
+              <input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@example.com" required />
             </div>
-
             <button type="submit" className={styles.submitBtn} disabled={loading}>
-              {loading ? "Sending..." : "Send Reset Link"}
+              {loading ? "Sending..." : "Send Reset Link \u2192"}
             </button>
           </form>
         )}

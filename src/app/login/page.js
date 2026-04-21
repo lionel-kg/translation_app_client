@@ -19,7 +19,7 @@ const LoginPage = () => {
     setLoading(true);
     try {
       await login(email, password);
-      router.push("/words");
+      router.push("/");
     } catch (err) {
       setError(err.response?.data?.error || "Login failed");
     } finally {
@@ -29,13 +29,14 @@ const LoginPage = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.orb1}></div>
-      <div className={styles.orb2}></div>
-
       <div className={styles.card}>
+        <div className={styles.stampIcon}>
+          <div className={styles.stampInner}>{"\u{1F98A}"}</div>
+        </div>
+
         <div className={styles.header}>
           <h1>Welcome Back</h1>
-          <p>Sign in to continue learning</p>
+          <p>Sign in to your language notebook</p>
         </div>
 
         <form onSubmit={handleSubmit} className={styles.form}>
@@ -52,7 +53,7 @@ const LoginPage = () => {
             />
           </div>
           <div className={styles.field}>
-            <label htmlFor="password">Passworde</label>
+            <label htmlFor="password">Password</label>
             <input
               id="password"
               type="password"
@@ -66,7 +67,7 @@ const LoginPage = () => {
             Forgot password?
           </Link>
           <button type="submit" className={styles.submitBtn} disabled={loading}>
-            {loading ? "Signing in..." : "Sign In"}
+            {loading ? "Signing in..." : "Sign In \u2192"}
           </button>
         </form>
 

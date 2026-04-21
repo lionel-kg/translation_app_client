@@ -1,57 +1,48 @@
-$bg-dark: #0f172a;
-$primary: #6366f1;
-$text-light: #f1f5f9;
-$text-dim: #94a3b8;
-$danger: #ef4444;
+$cream: #f5f1e6;
+$paper: #fbf7ec;
+$ink: #1e1a15;
+$sub: #6b6257;
+$line: #d9d1bd;
+$terra: #c75d3a;
+$stamp: #b03a2e;
 
 .container {
   min-height: 100vh;
-  background: $bg-dark;
+  background: $cream;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 1rem;
-  position: relative;
-  overflow: hidden;
-}
-
-.orb1,
-.orb2 {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.3;
-  pointer-events: none;
-}
-
-.orb1 {
-  width: 300px;
-  height: 300px;
-  background: $primary;
-  top: -50px;
-  right: -50px;
-}
-
-.orb2 {
-  width: 250px;
-  height: 250px;
-  background: #ec4899;
-  bottom: -50px;
-  left: -50px;
 }
 
 .card {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-  border-radius: 1.5rem;
+  background: $paper;
+  border: 1px solid $line;
+  border-radius: 4px;
   padding: 2.5rem;
   width: 100%;
-  max-width: 420px;
+  max-width: 400px;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.06);
   position: relative;
-  z-index: 1;
+}
+
+.stampIcon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 16px;
+  transform: rotate(-5deg);
+}
+
+.stampInner {
+  width: 100%;
+  height: 100%;
+  background: $stamp;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  border: 1.5px dashed rgba(255, 255, 255, 0.6);
 }
 
 .header {
@@ -59,15 +50,18 @@ $danger: #ef4444;
   margin-bottom: 2rem;
 
   h1 {
-    color: $text-light;
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 28px;
+    color: $ink;
+    margin-bottom: 4px;
   }
 
   p {
-    color: $text-dim;
-    font-size: 0.95rem;
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: $sub;
   }
 }
 
@@ -78,73 +72,80 @@ $danger: #ef4444;
 }
 
 .error {
-  background: rgba($danger, 0.15);
-  border: 1px solid rgba($danger, 0.3);
-  color: $danger;
+  background: rgba($terra, 0.1);
+  border: 1px solid rgba($terra, 0.3);
+  color: $terra;
   padding: 0.75rem 1rem;
-  border-radius: 0.75rem;
-  font-size: 0.85rem;
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
 }
 
 .field {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.4rem;
 
   label {
-    color: $text-dim;
-    font-size: 0.85rem;
-    font-weight: 500;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    color: $sub;
+    letter-spacing: 1px;
+    text-transform: uppercase;
   }
 
   input {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 0.75rem;
+    background: $cream;
+    border: 1px solid $line;
+    border-radius: 4px;
     padding: 0.85rem 1rem;
-    color: $text-light;
-    font-size: 0.95rem;
+    color: $ink;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
     outline: none;
     transition: border-color 0.2s;
 
     &::placeholder {
-      color: rgba($text-dim, 0.5);
+      color: rgba($sub, 0.5);
     }
 
     &:focus {
-      border-color: $primary;
-      box-shadow: 0 0 0 3px rgba($primary, 0.15);
+      border-color: $terra;
     }
   }
 }
 
 .forgotLink {
-  color: $text-dim;
-  font-size: 0.85rem;
+  color: $sub;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
   text-decoration: none;
   text-align: right;
   margin-top: -0.5rem;
+  letter-spacing: 0.3px;
 
   &:hover {
-    color: $primary;
+    color: $terra;
   }
 }
 
 .submitBtn {
-  background: linear-gradient(135deg, $primary, darken($primary, 10%));
-  color: white;
+  background: $terra;
+  color: #fdf6e6;
   border: none;
-  border-radius: 0.75rem;
+  border-radius: 4px;
   padding: 0.9rem;
-  font-size: 1rem;
+  font-family: 'Fraunces', serif;
+  font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s;
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.15);
+  transition: box-shadow 0.2s;
   margin-top: 0.5rem;
 
   &:hover:not(:disabled) {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 15px rgba($primary, 0.4);
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
   }
 
   &:disabled {
@@ -155,12 +156,12 @@ $danger: #ef4444;
 
 .switchLink {
   text-align: center;
-  color: $text-dim;
-  font-size: 0.9rem;
+  color: $sub;
+  font-size: 13px;
   margin-top: 1.5rem;
 
   a {
-    color: $primary;
+    color: $terra;
     font-weight: 600;
     text-decoration: none;
 
