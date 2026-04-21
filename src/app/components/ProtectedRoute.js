@@ -18,11 +18,12 @@ const ProtectedRoute = ({ children }) => {
       <div
         style={{
           minHeight: "100vh",
-          background: "#0f172a",
+          background: "#f5f1e6",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          color: "#94a3b8",
+          color: "#6b6257",
+          fontFamily: "'Fraunces', serif",
           fontSize: "1.1rem",
         }}
       >
